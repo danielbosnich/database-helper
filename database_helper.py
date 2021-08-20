@@ -72,11 +72,11 @@ class Sqlite3():
         with self.locks[self.database]:
             self.open()
             try:
-                statement = ', '.join(f'{key} = %s' for key in details)
+                statement = ', '.join(f'{key} = ?' for key in details)
                 values = list(details.values())
                 values.append(key_value)
                 sql_statement = (f'UPDATE {table} SET {statement} WHERE '
-                                f'{key_name} = %s')
+                                f'{key_name} = ?')
                 self.db_cur.execute(sql_statement, values)
                 self.db_con.commit()
             finally:
