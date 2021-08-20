@@ -7,14 +7,14 @@ Python classes that simplify working with SQLite3 and MySQL databases by making 
 # Usage
 ```python
 from datetime import datetime
-from database_helper import SQLite3
+from database_helper import Sqlite3
 
 def example():
     """An example function"""
-    database = SQLite3('my_db_name.db')
+    database = Sqlite3('my_db_name.db')
 
     create_table_sql = (
-        """CREATE TABLE IF NOT EXISTS my_table
+        """CREATE TABLE IF NOT EXISTS my_table (
            id INTEGER PRIMARY KEY NOT NULL,
            column1 TEXT NOT NULL,
            column2 TEXT NOT NULL,
@@ -47,5 +47,5 @@ def example():
 
     # Verify the update worked
     new_output = database.select(table='my_table', columns=['column4'], key_name='id', key_value=row_id)
-    print(new_output[0][0])  # illustration'
+    print(new_output[0][0])  # illustration
 ```
