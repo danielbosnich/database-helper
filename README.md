@@ -1,3 +1,5 @@
+![Lint status](https://github.com/danielbosnich/database-helper/actions/workflows/lint.yml/badge.svg)
+
 # database-helper
 Python classes that simplify working with SQLite3 and MySQL databases by making all database calls thread-safe and always properly closing the database connection.
 
