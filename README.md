@@ -1,3 +1,4 @@
+![Test status](https://github.com/danielbosnich/database-helper/actions/workflows/test.yml/badge.svg)
 ![Lint status](https://github.com/danielbosnich/database-helper/actions/workflows/lint.yml/badge.svg)
 
 # database-helper
