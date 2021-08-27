@@ -82,14 +82,15 @@ class Sqlite3():
             finally:
                 self.close()
 
-    def select(self, *, table, columns, key_name=None, key_value=None,
+    def select(self, *, table, columns=('*'), key_name=None, key_value=None,
                order_column=None, direction=None, limit=None):
         """Selects values from the passed column(s) from the specified table
         with optional constraints
 
         Args:
             table (str): Name of the table to be updated
-            columns (list): Table column names to select
+            columns (list): Table column names to select. Defaults to
+                selecting all columns
             key_name (str): Column name for the WHERE specification
             key_value: Variable type value for the WHERE specification
             order_column (str): Column name to order by
@@ -229,14 +230,15 @@ class MySql():
             finally:
                 self.close()
 
-    def select(self, *, table, columns, key_name=None, key_value=None,
+    def select(self, *, table, columns=('*'), key_name=None, key_value=None,
                order_column=None, direction=None, limit=None):
         """Selects values from the passed column(s) from the specified table
         with optional constraints
 
         Args:
             table (str): Name of the table to be updated
-            columns (list): Table column names to select
+            columns (list): Table column names to select. Defaults to
+                selecting all columns
             key_name (str): Column name for the WHERE specification
             key_value: Variable type value for the WHERE specification
             order_column (str): Column name to order by

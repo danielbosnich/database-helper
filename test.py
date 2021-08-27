@@ -25,18 +25,21 @@ class Sqlite3Tests(TestCase):
         os.remove(DATABASE)
 
     def test_01_select(self):
-        """Tests that the select method works"""
-        positions = self.database.select(
-            table=TABLE,
-            columns=['Pos']
-        )
+        """Tests that the select method works and defaults to selecting all
+        the columns"""
+        all_teams = self.database.select(table=TABLE)
+        self.assertEqual(len(all_teams), 20)
+        for team_details in all_teams:
+            self.assertEqual(len(team_details), 10)
 
-        index = 1
-        for position in positions:
-            self.assertEqual(position[0], index)
-            index += 1
+    def test_02_select_column(self):
+        """Tests that the select method works when selecting a single column"""
+        positions = self.database.select(table=TABLE, columns=['Pos'])
 
-    def test_02_select_specific(self):
+        for index, position in enumerate(positions):
+            self.assertEqual(position[0], index+1)
+
+    def test_03_select_specific_row(self):
         """Tests that the select method works when selecting a specific row"""
         team = self.database.select(
             table=TABLE,
@@ -46,7 +49,7 @@ class Sqlite3Tests(TestCase):
         )
         self.assertEqual(team[0][0], 'Arsenal')  # Come on you Gunners!
 
-    def test_03_select_ordered(self):
+    def test_04_select_ordered(self):
         """Tests that the select method works when ordering the data"""
         teams = self.database.select(
             table=TABLE,
@@ -61,7 +64,7 @@ class Sqlite3Tests(TestCase):
         self.assertEqual(teams[0][0], fewest_goals_against)
         self.assertEqual(teams[19][0], most_goals_against)
 
-    def test_04_select_limited(self):
+    def test_05_select_limited(self):
         """Tests that the select method works when limiting the data"""
         data = self.database.select(
             table=TABLE,
@@ -70,7 +73,7 @@ class Sqlite3Tests(TestCase):
         )
         self.assertEqual(len(data), 10)
 
-    def test_05_update(self):
+    def test_06_update(self):
         """Tests that the update method works"""
         # Let's pretend that Tottenham got relegated
         self.database.update(
@@ -98,7 +101,7 @@ class Sqlite3Tests(TestCase):
         self.assertEqual(relegated_teams[1][0], 'Leeds United')
         self.assertEqual(relegated_teams[2][0], 'Leicester City')
 
-    def test_06_execute_sql(self):
+    def test_07_execute_sql(self):
         """Tests that the execute sql method works by dropping the table"""
         sql_statement = f'DROP TABLE {TABLE}'
         self.database.execute_sql(sql_statement)
