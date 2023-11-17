@@ -2,6 +2,8 @@
 Database helper classes for SQLite3 and MySQL databases
 """
 
+# pylint: disable=too-many-arguments
+
 import sqlite3
 import threading
 
